@@ -1,0 +1,57 @@
+Question 1:
+def find_leaders(arr): 
+    n = len(arr) 
+    max_right = arr[n - 1] 
+    leaders = [max_right] 
+    for i in range(n - 2, -1, -1): 
+        if arr[i] > max_right: 
+            max_right = arr[i] 
+            leaders.append(max_right) 
+    # Print the leaders 
+    print("Leaders in the array:", end=" ") 
+    for leader in reversed(leaders): 
+        print(leader, end=" ")  
+# Take input from the user 
+arr = list(map(int, input("Enter the array elements separated by space: ").split())) 
+# Call the function with user input 
+find_leaders(arr) 
+
+Question 2:
+def max_profit(prices): 
+    if not prices or len(prices) == 1: 
+        return 0 
+    min_price = prices[0] 
+    max_profit = 0 
+    for price in prices[1:]: 
+        max_profit = max(max_profit, price - min_price) 
+        min_price = min(min_price, price) 
+    return max_profit 
+# Take input from the user 
+prices = list(map(int, input("Enter the stock prices separated by space: ").split())) 
+# Call the function with user input 
+result = max_profit(prices) 
+print("Maximum Profit:", result) 
+
+Question 3:
+def subsetXORSum(nums): 
+    def calculate_xor(subset): 
+        result = 0 
+        for num in subset: 
+            result ^= num 
+        return result 
+    def generate_subsets(index, current_subset): 
+        if index == len(nums): 
+            xor_sum[0] += calculate_xor(current_subset) 
+            return 
+        # Include the current element in the subset 
+        generate_subsets(index + 1, current_subset + [nums[index]]) 
+        # Exclude the current element from the subset 
+        generate_subsets(index + 1, current_subset) 
+    xor_sum = [0] 
+    generate_subsets(0, []) 
+    return xor_sum[0] 
+# Take input from the user 
+nums = list(map(int, input("Enter the array elements separated by space: ").split())) 
+# Call the function with user input 
+result = subsetXORSum(nums) 
+print("Sum of all XOR totals for every subset:", result) 
